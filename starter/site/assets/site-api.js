@@ -57,6 +57,13 @@
     } catch (_) {
       target.textContent = "—";
       target.title = "Shared visitor counter is unavailable.";
+      if (notice && setupMode && enabled) {
+        notice.hidden = false;
+        const message = document.getElementById("counterSetupText");
+        if (message) message.textContent = document.documentElement.lang === "fa"
+          ? "تنظیمات وارد شده‌اند اما API پاسخ موفق نداد. آدرس پروژه، کلید عمومی، مجوز مبدأ و انتشار تابع visitor-counter را بررسی کنید."
+          : "Settings are present, but the API did not return a successful response. Check the project URL, publishable key, allowed origin, and visitor-counter deployment.";
+      }
     }
   }
   document.addEventListener("DOMContentLoaded", countView);
