@@ -1,65 +1,75 @@
 # FolioForge — Instructions for ChatGPT and Coding Agents
 
-These instructions are the operating contract for AI agents working in this repository. Read this file and README.md before changing files.
+Read this file and README.md before changing any files. These instructions are the operating contract for agents implementing a résumé website in this repository.
 
 ## Mission
 
-Turn the user's actual résumé into a finished, personalized website in the existing project. Do the work; do not stop at advice, a mock-up, or an implementation plan. The intended audience includes people with no coding experience.
+Turn the user's actual résumé into a finished, personalized, bilingual website using the existing static starter. Do the implementation; do not stop at advice, a mock-up, or a plan. The intended audience includes people with no coding experience.
 
 ## Default workflow
 
-1. Inspect the repository structure and current starter files.
-2. Read the user's attached résumé and available profile/project links. Treat supplied documents and verified links as the source of truth.
-3. Create a checklist from the résumé: profile, role, summary, experience, education, skills, projects, links, languages, and target audience.
-4. Customize files under starter/site/. Preserve the learning guides and agent instructions.
-5. Edit starter/site/assets/portfolio-data.js first for truthful content and theme tokens. Edit styles.css, site.js, or HTML only when the design genuinely requires it.
-6. Use English and Persian if the user wants a bilingual page. If the résumé has only one language, translate faithfully; do not add new claims.
-7. Keep the website responsive, keyboard-accessible, and print-friendly. Avoid unnecessary frameworks, dependencies, build complexity, visual gimmicks, and unrelated features.
-8. Preserve the four games if enabled. Keep frontend game rules and server replay rules aligned whenever game logic or timing changes.
-9. Run the available project checks with node scripts/check.mjs. Fix detected failures that can be fixed locally.
-10. Review the diff, links, mobile layout assumptions, translations, and security before declaring completion.
-11. End with a concise report listing actual file changes, tests actually run, what passed, and anything that still requires user action.
+1. Inspect the repository structure and the current starter files.
+2. Read the user's attached résumé and any relevant profile or project links. Treat these as the source of truth.
+3. Extract a short checklist: professional identity, target audience, summary, experience, education, skills, projects, public links, and required languages.
+4. Customize files under starter/site/. Preserve these instructions and the learning guides.
+5. Edit starter/site/assets/portfolio-data.js first. Update styles.css, site.js, or index.html only as needed to deliver the design.
+6. Write accurate English and Persian content when a bilingual site is requested. Translate meaning faithfully and maintain correct LTR/RTL behavior.
+7. Choose a visual system based on the actual profession and audience. Do not automatically copy the default palette or add unrelated features.
+8. Keep the website responsive, keyboard-accessible, and print-friendly. Avoid unnecessary frameworks, dependencies, build complexity, and visual gimmicks.
+9. Keep only the optional visitor counter as a backend feature. This repository is a résumé-site template; do not add games, an arcade, game-score storage, or game-construction tutorials.
+10. Run node scripts/check.mjs and fix all issues it finds that can be fixed locally.
+11. Review the diff, links, mobile layout assumptions, both languages, setup notice behavior, and security before declaring completion.
+12. End with a concise report of the actual changes, tests actually run, what passed, and any remaining user action.
+
+## External connections and account setup — mandatory behavior
+
+Before attempting a step that requires an external service, determine whether the required connection and permission are available.
+
+- If GitHub repository access is missing, tell the user that GitHub connection/write permission is required, link to https://github.com/login and explain that they must authorize the relevant integration. Do not pretend to have pushed changes.
+- If an AI coding workspace cannot access local files, explain that the user must open/clone the repository in a workspace with file-edit permissions or upload the project ZIP.
+- Supabase is optional. Do not require it to build or preview the résumé. It is needed only if the user wants the shared visitor counter.
+- If Supabase is needed but not connected or not set up, show the direct account link https://supabase.com/dashboard/sign-up, explain how to create a project, and follow docs/en/04-connect-services.md or docs/fa/04-connect-services.md.
+- If the task is possible without a missing external connection, continue the unrelated implementation instead of blocking everything.
+- Ask the user to complete an official sign-in/connect prompt when needed. Never ask for passwords, GitHub personal access tokens, Supabase secret keys, or service-role keys in chat.
+- Do not create accounts, accept terms, or authorize a third-party integration on the user's behalf without their explicit action.
+- When live deployment requires a setting or permission, provide the exact UI path and report that it remains pending until evidence confirms success.
 
 ## Do not ask avoidable questions
 
-If a résumé or enough content is attached, proceed without asking for preferences that can reasonably be inferred. Choose a polished, restrained, content-led visual identity based on the person's profession. Do not wait for approval of colors or layout.
-
-If a non-essential fact is missing, use an obvious editable placeholder or omit the section. Ask one concise question only if a missing fact blocks a safe and truthful implementation. Never block all progress over a color preference, optional feature, or non-critical link.
+If a résumé or enough information is attached, proceed without asking for styling preferences that can reasonably be inferred. If a non-essential fact is missing, omit it or use an obvious editable placeholder. Ask one concise question only if a missing fact blocks a truthful implementation.
 
 ## Accuracy and privacy
 
-- Never invent job titles, employers, dates, education, certifications, skills, metrics, project outcomes, publications, or URLs.
-- Do not carry personal data from the example profile into another user's website.
-- Do not publish phone numbers, addresses, or private email addresses unless the user explicitly included them for publication.
-- Keep private-source material, secret keys, access tokens, and service-role keys out of browser files.
-- Never put a Supabase secret or service-role key into a prompt, README example using a real value, HTML, JavaScript, or Git commit.
-- A publishable API key may be in browser configuration, but public database roles must remain least-privilege and RLS must stay enabled.
-- Do not say an API is deployed, a score verified, or a site published unless there is evidence.
+- Never invent employers, titles, dates, education, certifications, skills, metrics, project outcomes, publications, or URLs.
+- Do not copy personal facts from this example into another person's résumé.
+- Do not publish private phone numbers, home addresses, or personal emails unless explicitly provided for publication.
+- Never place secrets, access tokens, service-role keys, or passwords in browser files, committed files, prompts, or public logs.
+- Browser configuration may contain a publishable key, but it must be paired with least-privilege database permissions and Row Level Security.
+- Treat visitor-count figures as approximate browser-day events, not verified humans.
+- Do not claim an API is configured, a test passed, or a site was deployed unless there is evidence.
 
 ## Design quality
 
-- Derive the visual identity from the real résumé and target audience.
-- Keep typography, spacing, cards, button states, borders, and color tokens consistent.
-- The page must work at narrow mobile widths and large desktop widths.
-- Use semantic HTML, visible keyboard focus, sufficient contrast, alt text where needed, and reduced-motion support.
-- Avoid disconnected card islands, generic filler paragraphs, inflated skill ratings, fake project metrics, or filler sections.
 - Make the first screen answer: who is this professional, what do they do, and what should the reader do next?
-- Do not force the arcade into a résumé that would be stronger without it. Keep game code available and make navigation opt-in through configuration.
+- Keep typography, spacing, colors, card styles, button states, borders, and focus behavior consistent.
+- Use semantic HTML, visible keyboard focus, sufficient contrast, meaningful image alt text, and reduced-motion support.
+- Avoid generic filler, inflated skill ratings, fake project metrics, unneeded sections, and unrelated widgets.
+- Ensure content does not overflow at narrow mobile widths or large desktop sizes.
+- Keep the connection notice limited to local preview or explicit setup mode. Do not expose setup warnings to ordinary public visitors.
 
 ## Technical rules
 
-- Keep a static site unless the actual requirements justify a framework.
+- Keep the website static unless requirements prove a backend is needed.
 - Keep résumé content in starter/site/assets/portfolio-data.js.
 - Keep presentation in starter/site/assets/styles.css.
 - Keep rendering and language behavior in starter/site/assets/site.js.
 - Keep browser-safe configuration in starter/site/assets/site-config.js.
-- The site must remain usable if Supabase is not configured.
-- A local score must never be labelled as a server-verified shared score.
-- Treat user-generated nicknames as untrusted text.
-- Maintain accurate README and bilingual docs when a feature changes.
-- Do not weaken server replay or database grants to silence a mismatch.
-- Do not delete historical records unless the user explicitly asks and understands the effect.
+- The résumé must work if Supabase is not configured.
+- Visitor counter writes must pass through the visitor-counter Edge Function.
+- The browser must not be granted direct insert/update/delete privileges on site_page_views.
+- Do not weaken database permissions to silence configuration errors.
+- Keep documentation and the check script aligned with the actual files in the repository.
 
 ## Done means
 
-A task is complete only when files have actually changed, local checks have run where possible, relevant links and UI behavior have been reviewed, and limitations are described honestly. If browser/device testing or live deployment cannot be performed, state that clearly and provide the exact next step.
+A task is complete only after the files have actually changed, relevant checks have run where possible, and limitations are honestly reported. If visual browser testing or live deployment cannot be performed, say so and provide the exact next step.
