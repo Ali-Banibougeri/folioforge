@@ -150,3 +150,5 @@ html[dir=rtl] .abstract-mark{transform:rotate(8deg);transform-origin:right cente
   .site-footer{display:block;padding:6px 0}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.project-card,.button{transition:none}}
+
+.visitor-stat{display:inline-flex;align-items:center;gap:7px;padding:5px 9px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:.76rem;white-space:nowrap}.visitor-stat strong{color:var(--accent);font-variant-numeric:tabular-nums}
