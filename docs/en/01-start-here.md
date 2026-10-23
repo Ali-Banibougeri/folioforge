@@ -32,7 +32,7 @@ The website is intentionally static. HTML describes the content structure, CSS g
 
 The main content file is starter/site/assets/portfolio-data.js. It contains English and Persian versions of your profile. The agent should replace example values from your résumé rather than paste your whole CV into a single paragraph.
 
-The arcade is separate and optional. A professional résumé does not need a game; set features.arcadeEnabled to false when it does not fit your audience.
+The visitor counter is optional. Your résumé works without Supabase; enable the counter only after creating your own Supabase project and following the connection guide.
 
 ## Step 4: Run it locally
 
@@ -51,7 +51,7 @@ Stop the server with Ctrl+C. If Python is not installed, a local static-server e
 - Remove sample text and placeholder links.
 - Check the layout on a phone-sized screen and a desktop.
 - Use Print → Save as PDF and inspect the output.
-- If using the arcade, play a round of each game.
+- If the visitor counter is enabled, verify that the Edge Function returns a count.
 - Run node scripts/check.mjs.
 
 ## Step 6: Publish
