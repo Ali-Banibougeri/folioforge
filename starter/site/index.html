@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10151f">
+  <meta name="description" content="A professional portfolio website built with FolioForge.">
+  <meta property="og:title" content="Your Name — Portfolio">
+  <meta property="og:description" content="A clear introduction to my work, skills, and selected projects.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+  <title>Your Name — Portfolio</title>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="Home">
+        <span class="brand-mark" aria-hidden="true">FF</span>
+        <span id="brandName">Your Name</span>
+      </a>
+      <nav class="nav-actions" aria-label="Primary navigation">
+        <a href="#projects" data-nav="projects">Projects</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+        <a class="nav-link arcade-nav" id="arcadeNav" href="arcade/" hidden>Arcade</a>
+        <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">فارسی</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow" id="profileAvailability">Open to relevant opportunities</p>
+          <h1><span id="profileName">Your Name</span><span class="title-line" id="profileRole">Your Professional Title</span></h1>
+          <p class="hero-tagline" id="profileTagline">A clear, truthful one-sentence description of the value you bring.</p>
+          <p class="location"><span aria-hidden="true">⌖</span> <span id="profileLocation">City, Country</span></p>
+          <div class="hero-actions">
+            <a class="button primary" href="#contact" id="heroContact">Contact me <span aria-hidden="true">↗</span></a>
+            <button class="button secondary" id="printButton" type="button">Print / Save PDF</button>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Professional focus">
+          <span class="panel-overline" id="panelOverline">PERSONAL PORTFOLIO</span>
+          <div class="abstract-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <p id="panelCaption">A focused introduction to my experience, projects, and way of thinking.</p>
+          <div class="panel-line"></div>
+          <p class="panel-small" id="panelLocation">City, Country</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container two-column">
+        <div class="section-heading"><p class="eyebrow">01 / <span id="labelAbout">About</span></p><h2 id="aboutTitle">A little about me</h2></div>
+        <div class="section-body"><p class="body-copy" id="aboutBody">Write a concise professional summary.</p></div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="experience">
+      <div class="container">
+        <div class="section-intro"><div><p class="eyebrow">02 / <span id="labelExperience">Experience</span></p><h2 id="experienceTitle">Experience</h2></div><p id="experienceLead">Relevant experience, responsibilities, and verified outcomes.</p></div>
+        <div class="timeline" id="experienceList"></div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-intro"><div><p class="eyebrow">03 / <span id="labelProjects">Selected work</span></p><h2 id="projectsTitle">Selected projects</h2></div><p id="projectsLead">A few projects that show how I approach real problems.</p></div>
+        <div class="project-grid" id="projectList"></div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="skills">
+      <div class="container">
+        <div class="section-intro"><div><p class="eyebrow">04 / <span id="labelSkills">Toolkit</span></p><h2 id="skillsTitle">Skills</h2></div><p id="skillsLead">Grouped by practical use.</p></div>
+        <div class="skills-grid" id="skillsList"></div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="container">
+        <div class="section-intro"><div><p class="eyebrow">05 / <span id="labelEducation">Background</span></p><h2 id="educationTitle">Education</h2></div><p id="educationLead">Education and credentials relevant to my work.</p></div>
+        <div class="education-grid" id="educationList"></div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container contact-grid">
+        <div><p class="eyebrow">06 / <span id="labelContact">Contact</span></p><h2 id="contactTitle">Let's talk about something useful.</h2><p class="body-copy" id="contactLead">Have a relevant opportunity or question? Get in touch.</p></div>
+        <div class="contact-list" id="contactList"></div>
+      </div>
+    </section>
+
+    <section class="section arcade-callout" id="arcadeCallout" hidden>
+      <div class="container arcade-banner">
+        <div><p class="eyebrow">OPTIONAL MINI PROJECT</p><h2 id="arcadeTitle">A little intermission</h2><p id="arcadeDescription">Play four small classic games.</p></div>
+        <a class="button primary" href="arcade/" id="arcadeLink">Open the arcade <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner"><p id="footerText">Built with FolioForge. Replace this footer before publishing.</p><a href="https://github.com/YOUR_USERNAME/folioforge" id="guideLink" rel="noopener noreferrer">How this site was built ↗</a><span id="footerYear"></span></div>
+  </footer>
+
+  <script src="assets/portfolio-data.js"></script>
+  <script src="assets/site-config.js"></script>
+  <script src="assets/site-api.js"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>
