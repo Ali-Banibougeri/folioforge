@@ -1,4 +1,4 @@
 project_id = "YOUR_PROJECT_REF"
 
-[functions.arcade-api]
+[functions.visitor-counter]
 verify_jwt = false
