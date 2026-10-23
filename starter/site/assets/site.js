@@ -227,7 +227,7 @@
     if ($("counterSetupTitle")) $("counterSetupTitle").textContent = pageUI.counterSetupTitle;
     if ($("counterSetupText")) $("counterSetupText").textContent = pageUI.counterSetupText;
     if ($("counterSupabaseLink")) $("counterSupabaseLink").textContent = pageUI.counterSupabaseLink + " ↗";
-    if ($("counterSetupGuideLink")) $("counterSetupGuideLink").textContent = pageUI.counterSetupGuideLink + " ↗";
+    if ($("counterSetupGuideLink")) { $("counterSetupGuideLink").textContent = pageUI.counterSetupGuideLink + " ↗"; $("counterSetupGuideLink").href = language === "fa" ? "https://github.com/AliB771/folioforge/blob/main/docs/fa/04-connect-services.md" : "https://github.com/AliB771/folioforge/blob/main/docs/en/04-connect-services.md"; }
     $("guideLink").textContent = pageUI.guide + " ↗";
     $("footerYear").textContent = String(new Date().getFullYear());
 
