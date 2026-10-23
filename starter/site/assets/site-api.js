@@ -44,7 +44,8 @@
     const target = document.getElementById("pageViews");
     if (!target || !configured) return;
     try {
-      const result = await call({ action: "view", page: "home", visitor_id: visitorId() });
+      const page = document.body.dataset.page === "arcade" ? "arcade" : "home";
+      const result = await call({ action: "view", page, visitor_id: visitorId() });
       target.textContent = new Intl.NumberFormat().format(Number(result.count) || 0);
     } catch (_) {
       target.textContent = "—";
