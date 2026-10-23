@@ -3,5 +3,5 @@
 window.FOLIOFORGE_SITE_CONFIG = Object.freeze({
   supabaseUrl: "https://YOUR_PROJECT_REF.supabase.co",
   publishableKey: "PASTE_SUPABASE_PUBLISHABLE_KEY",
-  functionName: "arcade-api"
+  functionName: "visitor-counter"
 });
