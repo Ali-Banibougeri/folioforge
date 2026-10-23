@@ -1,0 +1,19 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+supabase/.env
+supabase/functions/.env
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs / test output
+npm-debug.log*
+*.log
+coverage/
+dist/
+node_modules/
