@@ -94,7 +94,7 @@ This repository includes a GitHub Actions workflow that publishes only starter/s
 3. Push a change to main or run the workflow from Actions.
 4. Open the URL shown by the workflow and check it on mobile and desktop.
 
-GitHub requires this one-time account/repository authorization. If Pages is not enabled, the agent should report the exact setting to change rather than claiming the site was published.
+GitHub requires this one-time account/repository authorization. The workflow runs static checks on pushes. To deploy the website, first enable Pages in Settings → Pages and choose GitHub Actions; then open Actions → Check and optionally deploy FolioForge → Run workflow, check the deploy option, and start the run. If Pages is not enabled or permission is missing, the agent must report that exact step instead of claiming publication.
 
 ## Optional: visitor counter
 
