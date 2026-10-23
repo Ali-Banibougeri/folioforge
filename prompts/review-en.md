@@ -7,7 +7,7 @@ Read AGENTS.md before editing. Inspect the current implementation and identify t
 - Keep both language directions and translations correct.
 - Do not add dependencies without a clear reason.
 - Never place a secret key in browser code or grant unrestricted anonymous database writes.
-- For game changes, keep frontend and server replay logic aligned.
+- Keep this repository focused on résumé websites and the optional visitor counter. Do not add games or arcade features.
 - Run node scripts/check.mjs and any relevant available checks.
 - Do not claim browser tests or deployment occurred unless they actually did.
 - Report changed files, checks run, results, risks, and any manual step still required.
