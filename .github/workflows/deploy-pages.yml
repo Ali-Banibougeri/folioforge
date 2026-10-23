@@ -32,6 +32,8 @@ jobs:
         run: node scripts/check.mjs
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Upload website artifact
         uses: actions/upload-pages-artifact@v3
         with:
