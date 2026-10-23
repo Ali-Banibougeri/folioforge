@@ -1,4 +1,4 @@
-name: Build and deploy FolioForge website
+name: Check and optionally deploy FolioForge
 
 on:
   push:
@@ -8,6 +8,12 @@ on:
       - "scripts/check.mjs"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Publish the website now (enable GitHub Pages in Settings first)"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -15,7 +21,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: github-pages
+  group: folioforge-pages
   cancel-in-progress: true
 
 jobs:
@@ -27,25 +33,26 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
       - name: Run static checks
         run: node scripts/check.mjs
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: false
       - name: Upload website artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: starter/site/
 
   deploy:
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy == true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: false
       - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4
