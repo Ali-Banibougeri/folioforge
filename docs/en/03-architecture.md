@@ -1,53 +1,53 @@
-# 03 — How the Website Works
+# 03 — Understand the Website Architecture
 
 [← FolioForge README](../../README.md) · [فارسی](../fa/03-architecture.md)
 
-FolioForge keeps the main résumé site static. That makes it fast, inexpensive to host, and easy for an AI coding agent to customize. The optional arcade uses an API only for shared counters and server-verified high scores.
+FolioForge keeps the résumé static. This makes it quick to load, inexpensive to host, and easy for an AI coding agent to customize. The only optional backend feature is a shared visitor counter.
 
-## The front end
+## The browser
 
 - HTML describes semantic sections and accessible controls.
 - CSS in starter/site/assets/styles.css defines the visual system, responsive layout, print styles, and RTL adjustments.
-- The data file starter/site/assets/portfolio-data.js holds career content in English and Persian, plus theme colors.
-- The renderer starter/site/assets/site.js builds experience, project, skill, education, and contact sections using DOM text nodes. This avoids treating résumé text as executable HTML.
-- The arcade page contains the four game engines and their controls.
-- The browser API client sends public requests only; it does not contain a server secret.
+- starter/site/assets/portfolio-data.js holds résumé content in English and Persian, plus theme colors.
+- starter/site/assets/site.js renders experience, projects, skills, education, and contact sections using DOM text nodes. Résumé text is not interpreted as executable HTML.
+- starter/site/assets/site-config.js contains browser-safe project configuration and a publishable API key placeholder.
+- starter/site/assets/site-api.js sends the public visitor-count request. It does not contain a secret/service-role key.
 
-## Why the content is separate
+## Why keep content separate?
 
-A coding agent should be able to edit your experience and projects without rewriting the page structure. This improves maintainability and makes it easier for non-programmers to tell where their own facts belong.
+An AI coding agent should be able to edit experience and projects without rewriting page structure. This makes the site easier to maintain and helps non-programmers find where their real facts belong.
 
-Use real dates, titles, names, and links. If a field is unknown, leave it blank or use a visible placeholder until verified.
+Use verified titles, dates, names, and links. If a field is unknown, omit it or leave a clear placeholder.
 
 ## Language switching
 
-The résumé data has separate en and fa sections. The site renderer changes document language and direction, then renders the selected language. English is LTR; Persian is RTL. Keep project names, URLs, email addresses, and technology names readable in mixed-script text.
+Résumé data has separate English and Persian sections. The renderer changes document language and direction, then displays the selected language. English is left-to-right; Persian is right-to-left. Keep URLs, email addresses, project names, and technology names readable in mixed-script text.
 
-The arcade uses a small translation layer for its interface. When changing dynamic game messages, ensure the current language remains correct after the next frame, score change, or round restart.
+## The optional visitor-counter backend
 
-## The optional backend
+The static résumé does not need a backend. The visitor counter uses one Supabase table and one Edge Function:
 
-The backend is not needed to show the résumé. When enabled:
-1. Browser sends an action and payload to the Edge Function.
-2. The Edge Function validates the origin, API key, request shape, and rate limit.
-3. Privileged reads/writes happen on the server using Supabase's built-in server secret map or a server-only override.
-4. RLS is enabled and direct public write permissions are revoked.
-5. A game score is accepted only after replaying the recorded inputs from the server-issued seed.
+1. The browser creates or reuses a random browser ID in local storage.
+2. The browser sends a page-view event and a public publishable key to the visitor-counter function.
+3. The function validates the origin, key, request shape, and rate limit.
+4. The function hashes the visitor ID and client IP using server-side hashing.
+5. The database stores at most one view per browser ID per UTC day.
+6. The function returns an approximate count.
 
-The browser must never receive the elevated key. Public configuration is not a substitute for database permissions.
+RLS is enabled, and direct anonymous table writes are revoked. The privileged write happens only on the server. The counter can be unavailable if the project is not configured; the résumé itself remains usable.
 
 ## Static publishing
 
-The GitHub Actions workflow exports only starter/site to GitHub Pages. Docs, server function source, and setup notes stay in the repository but are not copied into the published site artifact.
+The GitHub Actions workflow publishes only the contents of starter/site. Setup guides and server function source remain in the repository but are not copied into the website artifact.
 
-GitHub Pages cannot execute server code. Supabase Edge Functions host the optional server functionality separately.
+GitHub Pages cannot execute server code. The optional counter function runs separately as a Supabase Edge Function.
 
-## How to make a change safely
+## How to change the project safely
 
-1. Read the relevant file and existing behavior.
+1. Read the relevant file and current behavior.
 2. Make the smallest correct change.
-3. Add or update both translations.
+3. Keep English and Persian copy aligned.
 4. Run node scripts/check.mjs.
-5. Test the change in the browser at desktop and mobile widths.
-6. If game rules change, change the server replay implementation too.
-7. Review all new files for personal details and secrets before committing.
+5. Test mobile, desktop, language switching, links, and print output.
+6. If the counter changed, test its API response after setup.
+7. Review all new files for personal information and secrets before committing.
