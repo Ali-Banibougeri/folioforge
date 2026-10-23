@@ -1,7 +1,7 @@
 (() => {
   const cfg = window.FOLIOFORGE_SITE_CONFIG || {};
   const key = String(cfg.publishableKey || "").trim();
-  const configured = Boolean(cfg.supabaseUrl && key.length > 10 && !key.includes("PASTE_SUPABASE"));
+  const configured = Boolean(cfg.supabaseUrl && !cfg.supabaseUrl.includes("YOUR_PROJECT_REF") && key.length > 10 && !key.includes("PASTE_SUPABASE"));
   const endpoint = String(cfg.supabaseUrl || "").replace(/\/$/, "") + "/functions/v1/" + (cfg.functionName || "arcade-api");
 
   function visitorId() {
