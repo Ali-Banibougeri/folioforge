@@ -79,7 +79,7 @@ html[dir=rtl] .game-card{text-align:right}html[dir=rtl] .touch-controls{directio
  const $=id=>document.getElementById(id);
  const canvas=$('gameCanvas'),ctx=canvas.getContext('2d');
  const ui={score:$('currentScore'),best:$('personalBest'),machineBest:$('machineBest'),boardBest:$('boardBest'),status:$('gameStatus'),list:$('leaderboard'),mode:$('scoreMode'),form:$('recordForm'),name:$('playerName'),save:$('saveRecord'),msg:$('recordMessage'),help:$('boardHelp')};
- const sharedReady=Boolean(window.AliSiteAPI&&window.AliSiteAPI.isConfigured());
+ const sharedReady=Boolean(window.FolioForgeAPI&&window.FolioForgeAPI.isConfigured());
  const G={
   snake:{title:'Snake — Pocket Classic',code:'GAME 01',machine:'SNAKE // POCKET GAME',caption:'Collect food to grow.',controls:'Arrow keys or WASD. Avoid the walls and your tail.'},
   tetris:{title:'Tetris — Falling Blocks',code:'GAME 02',machine:'TETRIS // FALLING BLOCKS',caption:'Clear lines to score; higher scores fall faster.',controls:'Left/Right to move, Down to soft-drop, Up/W to rotate, Space to hard-drop.'},
@@ -121,8 +121,8 @@ html[dir=rtl] .game-card{text-align:right}html[dir=rtl] .touch-controls{directio
  }
  function setMode(m){boardMode=m;ui.mode.textContent=m==='global'?'SHARED BOARD':m==='fallback'?'LOCAL FALLBACK':'LOCAL MODE';ui.mode.style.color=m==='global'?'var(--mint)':'var(--accent)';ui.mode.style.borderColor=m==='global'?'#79d5c56b':'#f5a44b5c';$('databaseNotice').hidden=m==='global';ui.help.textContent=m==='global'?'SHARED MODE · Nicknames and scores are visible to all visitors.':m==='fallback'?'Shared storage unavailable; showing records saved in this browser.':'LOCAL MODE · Records stay in this browser until shared storage is configured.'}
  async function loadRecords(){
-  if(!sharedReady||!window.AliSiteAPI){records=loadLocal(gameId);setMode('local');renderRecords();return}
-  try{const result=await window.AliSiteAPI.call({action:'leaderboard',game_id:gameId});records=Array.isArray(result.records)?result.records.map(r=>({game_id:gameId,player_name:String(r.player_name||'Player').slice(0,18),score:Number(r.score)||0,created_at:r.created_at})).filter(r=>r.score>0):[];setMode('global');renderRecords()}
+  if(!sharedReady||!window.FolioForgeAPI){records=loadLocal(gameId);setMode('local');renderRecords();return}
+  try{const result=await window.FolioForgeAPI.call({action:'leaderboard',game_id:gameId});records=Array.isArray(result.records)?result.records.map(r=>({game_id:gameId,player_name:String(r.player_name||'Player').slice(0,18),score:Number(r.score)||0,created_at:r.created_at})).filter(r=>r.score>0):[];setMode('global');renderRecords()}
   catch(_){records=loadLocal(gameId);setMode('fallback');renderRecords()}
  }
  function qualifies(n){return n>0&&(records.length<10||n>=Number(records[records.length-1]?.score||0))}
@@ -282,7 +282,7 @@ html[dir=rtl] .game-card{text-align:right}html[dir=rtl] .touch-controls{directio
   if(timer||starting)return;
   if(gameOver){runId=null;runTrace='';runActive=false;traceOverflow=false;resetState();gameOver=false}
   if(!runActive){starting=true;try{
-   if(sharedReady&&window.AliSiteAPI){const session=await window.AliSiteAPI.call({action:'start',game_id:gameId});runId=session.run_id;reseed(session.seed);runTrace='';traceOverflow=false;resetState()}
+   if(sharedReady&&window.FolioForgeAPI){const session=await window.FolioForgeAPI.call({action:'start',game_id:gameId});runId=session.run_id;reseed(session.seed);runTrace='';traceOverflow=false;resetState()}
    else{runId=null;runTrace='';traceOverflow=false;reseed((Date.now()^Math.floor(Math.random()*0xffffffff))>>>0);resetState()}
    runActive=true
   }catch(_){runId=null;runTrace='';traceOverflow=false;reseed((Date.now()^Math.floor(Math.random()*0xffffffff))>>>0);resetState();runActive=true;if(sharedReady)setMode('fallback')}
@@ -318,7 +318,7 @@ html[dir=rtl] .game-card{text-align:right}html[dir=rtl] .touch-controls{directio
   submitting=true;ui.save.disabled=true;ui.save.textContent='Saving…';ui.msg.classList.remove('error');ui.msg.textContent='';
   const row={game_id:gameId,player_name:name,score:Math.min(100000,Math.floor(score)),created_at:new Date().toISOString()};
   try{
-   if(sharedReady&&window.AliSiteAPI&&runId&&!traceOverflow){const result=await window.AliSiteAPI.call({action:'finish',run_id:runId,game_id:gameId,player_name:name,score:row.score,trace:runTrace});if(!result.verified)throw new Error('The server did not verify this score.');runId=null;ui.form.hidden=true;setStatus('RECORD SAVED TO SHARED BOARD');await loadRecords()}
+   if(sharedReady&&window.FolioForgeAPI&&runId&&!traceOverflow){const result=await window.FolioForgeAPI.call({action:'finish',run_id:runId,game_id:gameId,player_name:name,score:row.score,trace:runTrace});if(!result.verified)throw new Error('The server did not verify this score.');runId=null;ui.form.hidden=true;setStatus('RECORD SAVED TO SHARED BOARD');await loadRecords()}
    else{saveLocal(row);records=loadLocal(gameId);setMode('local');renderRecords();ui.form.hidden=true;setStatus('RECORD SAVED LOCALLY');ui.help.textContent='This score is saved only in this browser. Configure Supabase and deploy arcade-api for shared verified scores.'}
   }catch(error){
    if(error&&error.code==='score_replay_mismatch'){ui.msg.classList.add('error');ui.msg.textContent='Server verification failed. This score was not added to the shared board.';ui.form.hidden=true;runId=null;runTrace='';runActive=false;setStatus('SCORE REJECTED BY SERVER — RESTART TO TRY AGAIN');return}
