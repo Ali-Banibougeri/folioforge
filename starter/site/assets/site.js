@@ -12,6 +12,11 @@
       panelOverline: "PERSONAL PORTFOLIO",
       panelCaption: "A focused introduction to my experience, projects, and way of thinking.",
       guide: "How this site was built",
+      visitorCount: "Unique visits",
+      counterSetupTitle: "Connect your visitor counter",
+      counterSetupText: "Create a Supabase account and configure the visitor-counter function. Your résumé itself works without a database.",
+      counterSupabaseLink: "Create / connect Supabase",
+      counterSetupGuideLink: "Step-by-step setup",
       index: "PROJECT",
       role: "Contribution",
       homeTitle: "Professional portfolio",
@@ -21,6 +26,11 @@
       panelOverline: "نمونه‌کار شخصی",
       panelCaption: "معرفی متمرکزی از تجربه، پروژه‌ها و روش فکر کردن من.",
       guide: "راهنمای ساخت این وب‌سایت",
+      visitorCount: "بازدید یکتا",
+      counterSetupTitle: "شمارنده بازدید را وصل کنید",
+      counterSetupText: "برای شمارنده بازدید، حساب و پروژه Supabase بسازید و تابع سمت سرور را تنظیم کنید. خود رزومه بدون دیتابیس هم کار می‌کند.",
+      counterSupabaseLink: "ساخت / اتصال Supabase",
+      counterSetupGuideLink: "راهنمای راه‌اندازی",
       index: "پروژه",
       role: "نقش من",
       homeTitle: "نمونه‌کار حرفه‌ای",
@@ -213,6 +223,11 @@
     $("contactTitle").textContent = labels.contact;
     $("contactLead").textContent = labels.contactLead;
     $("footerText").textContent = labels.footer;
+    if ($("visitorLabel")) $("visitorLabel").textContent = pageUI.visitorCount;
+    if ($("counterSetupTitle")) $("counterSetupTitle").textContent = pageUI.counterSetupTitle;
+    if ($("counterSetupText")) $("counterSetupText").textContent = pageUI.counterSetupText;
+    if ($("counterSupabaseLink")) $("counterSupabaseLink").textContent = pageUI.counterSupabaseLink + " ↗";
+    if ($("counterSetupGuideLink")) $("counterSetupGuideLink").textContent = pageUI.counterSetupGuideLink + " ↗";
     $("guideLink").textContent = pageUI.guide + " ↗";
     $("footerYear").textContent = String(new Date().getFullYear());
 
