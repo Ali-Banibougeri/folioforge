@@ -23,7 +23,6 @@
       <nav class="nav-actions" aria-label="Primary navigation">
         <a href="#projects" data-nav="projects">Projects</a>
         <a href="#contact" data-nav="contact">Contact</a>
-        <a class="nav-link arcade-nav" id="arcadeNav" href="arcade/" hidden>Arcade</a>
         <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">فارسی</button>
       </nav>
     </div>
@@ -93,14 +92,19 @@
         <div class="contact-list" id="contactList"></div>
       </div>
     </section>
-
-    <section class="section arcade-callout" id="arcadeCallout" hidden>
-      <div class="container arcade-banner">
-        <div><p class="eyebrow">OPTIONAL MINI PROJECT</p><h2 id="arcadeTitle">A little intermission</h2><p id="arcadeDescription">Play four small classic games.</p></div>
-        <a class="button primary" href="arcade/" id="arcadeLink">Open the arcade <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
   </main>
+
+  <aside id="counterSetupNotice" class="connection-notice" role="status" aria-live="polite" hidden>
+    <div class="connection-copy">
+      <p class="eyebrow">ONE-TIME SETUP</p>
+      <h2 id="counterSetupTitle">Connect your visitor counter</h2>
+      <p id="counterSetupText">Create a Supabase account and configure the visitor-counter function. Your résumé itself works without a database.</p>
+    </div>
+    <div class="connection-actions">
+      <a class="button primary" href="https://supabase.com/dashboard/sign-up" target="_blank" rel="noopener noreferrer">Create / connect Supabase ↗</a>
+      <a class="button secondary" href="https://github.com/AliB771/folioforge/blob/main/docs/en/04-connect-services.md" target="_blank" rel="noopener noreferrer">Step-by-step setup ↗</a>
+    </div>
+  </aside>
 
   <footer class="site-footer">
     <div class="container footer-inner"><p id="footerText">Built with FolioForge. Replace this footer before publishing.</p><a href="https://github.com/AliB771/folioforge" id="guideLink" rel="noopener noreferrer">How this site was built ↗</a><span class="visitor-stat"><span id="visitorLabel">Unique visits</span> <strong id="pageViews" aria-label="Unique visits">—</strong></span><span id="footerYear"></span></div>
