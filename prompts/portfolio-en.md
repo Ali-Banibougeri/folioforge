@@ -18,7 +18,7 @@ Turn my attached résumé into a professional, accurate, polished, bilingual web
 6. Put the strongest relevant facts first. Remove irrelevant sections and keep the page easy to scan.
 7. Build project cards with the actual problem, my contribution, technology labels, and verified links. Do not fake outcomes.
 8. Keep responsive behavior, accessible labels, keyboard focus, readable contrast, and print-to-PDF working.
-9. Keep the arcade as an optional feature. Preserve the four games and their score rules if they remain enabled; if game logic changes, keep the server replay code aligned.
+9. Keep only the optional visitor counter as a backend feature. Do not add an arcade, games, game-score storage, or game-construction instructions.
 10. Do not enable Supabase or invent project credentials if I have not supplied my own setup. The static résumé should work without a backend.
 11. Keep secret keys, service-role keys, passwords, and tokens out of browser code, committed files, and output bundles.
 12. Do not add a front-end framework unless the existing requirement truly needs it.
