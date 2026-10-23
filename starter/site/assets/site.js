@@ -12,24 +12,18 @@
       panelOverline: "PERSONAL PORTFOLIO",
       panelCaption: "A focused introduction to my experience, projects, and way of thinking.",
       guide: "How this site was built",
-      arcadeOpen: "Open the arcade",
       index: "PROJECT",
       role: "Contribution",
       homeTitle: "Professional portfolio",
-      arcadeTitle: "A little intermission",
-      arcadeDescription: "Play four small classic games."
     },
     fa: {
       heroContact: "تماس با من",
       panelOverline: "نمونه‌کار شخصی",
       panelCaption: "معرفی متمرکزی از تجربه، پروژه‌ها و روش فکر کردن من.",
       guide: "راهنمای ساخت این وب‌سایت",
-      arcadeOpen: "ورود به آرکید",
       index: "پروژه",
       role: "نقش من",
       homeTitle: "نمونه‌کار حرفه‌ای",
-      arcadeTitle: "وقفه‌ای کوتاه",
-      arcadeDescription: "چهار بازی کلاسیک کوچک."
     }
   };
   let language = "en";
@@ -221,13 +215,7 @@
     $("footerText").textContent = labels.footer;
     $("guideLink").textContent = pageUI.guide + " ↗";
     $("footerYear").textContent = String(new Date().getFullYear());
-    $("arcadeTitle").textContent = pageUI.arcadeTitle;
-    $("arcadeDescription").textContent = pageUI.arcadeDescription;
-    $("arcadeLink").textContent = pageUI.arcadeOpen + " ↗";
 
-    const hasArcade = Boolean(data.features && data.features.arcadeEnabled);
-    $("arcadeNav").hidden = !hasArcade;
-    $("arcadeCallout").hidden = !hasArcade;
     document.querySelectorAll("[data-nav='projects']").forEach((el) => el.textContent = labels.projects);
     document.querySelectorAll("[data-nav='contact']").forEach((el) => el.textContent = labels.contact);
     renderExperience(profile, labels);
