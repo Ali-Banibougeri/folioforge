@@ -1,7 +1,7 @@
 /* Customize this file first. Replace every sample value with facts from your own résumé. */
 window.FOLIOFORGE_DATA = {
   features: {
-    arcadeEnabled: true
+    visitorCounterEnabled: true
   },
   theme: {
     background: "#10151f",
