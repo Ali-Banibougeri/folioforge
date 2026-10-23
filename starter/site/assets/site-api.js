@@ -2,7 +2,7 @@
   const cfg = window.FOLIOFORGE_SITE_CONFIG || {};
   const key = String(cfg.publishableKey || "").trim();
   const configured = Boolean(cfg.supabaseUrl && !cfg.supabaseUrl.includes("YOUR_PROJECT_REF") && key.length > 10 && !key.includes("PASTE_SUPABASE"));
-  const endpoint = String(cfg.supabaseUrl || "").replace(/\/$/, "") + "/functions/v1/" + (cfg.functionName || "arcade-api");
+  const endpoint = String(cfg.supabaseUrl || "").replace(/\/$/, "") + "/functions/v1/" + (cfg.functionName || "visitor-counter");
 
   function visitorId() {
     const storageKey = "folioforge-visitor-id-v1";
@@ -42,10 +42,17 @@
 
   async function countView() {
     const target = document.getElementById("pageViews");
-    if (!target || !configured) return;
+    const notice = document.getElementById("counterSetupNotice");
+    const data = window.FOLIOFORGE_DATA || {};
+    const enabled = !data.features || data.features.visitorCounterEnabled !== false;
+    const params = new URLSearchParams(window.location.search);
+    const localPreview = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname) || window.location.protocol === "file:";
+    const setupMode = localPreview || params.get("setup") === "1";
+    if (notice) notice.hidden = !enabled || configured || !setupMode;
+    if (target && !enabled) target.closest(".visitor-stat")?.setAttribute("hidden", "");
+    if (!target || !configured || !enabled) return;
     try {
-      const page = document.body.dataset.page === "arcade" ? "arcade" : "home";
-      const result = await call({ action: "view", page, visitor_id: visitorId() });
+      const result = await call({ action: "view", page: "home", visitor_id: visitorId() });
       target.textContent = new Intl.NumberFormat().format(Number(result.count) || 0);
     } catch (_) {
       target.textContent = "—";
