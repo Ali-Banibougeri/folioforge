@@ -130,15 +130,15 @@ html[dir=rtl] .abstract-mark{transform:rotate(8deg);transform-origin:right cente
 @media(max-width:560px){
   .container{width:calc(100% - 30px)}
   .nav{min-height:65px;gap:10px}.brand{gap:8px;font-size:.88rem}.brand-mark{width:32px;height:32px}
-  .nav-actions{gap:11px;font-size:.8rem}.nav-actions>a:not(.arcade-nav){display:none}.language-toggle{padding:6px 10px}
+  .nav-actions{gap:11px;font-size:.8rem}.nav-actions>a[data-nav='projects']{display:none}.language-toggle{padding:6px 10px}
   .hero{padding-top:50px}h1{font-size:clamp(2.6rem,14vw,4rem)}
-  .section{padding:57px 0}.arcade-callout{padding-top:0}.arcade-banner{align-items:flex-start;flex-direction:column}
+  .section{padding:57px 0}
   .footer-inner{align-items:flex-start;flex-direction:column}
 }
 @media print{
   :root{color-scheme:light;--bg:#fff;--surface:#fff;--surface-raised:#fff;--text:#111827;--muted:#4b5563;--border:#d1d5db}
   body{background:#fff!important;color:#111827;font-size:10.5pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .site-header,.hero-actions,.language-toggle,.arcade-callout,.site-footer a,.skip-link{display:none!important}
+  .site-header,.hero-actions,.language-toggle,.site-footer a,.skip-link{display:none!important}
   .section{padding:20px 0;break-inside:avoid}
   .hero{padding-top:5px}
   .hero-grid,.two-column,.contact-grid{grid-template-columns:1fr 1fr;gap:20px}
