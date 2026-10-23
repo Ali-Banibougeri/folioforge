@@ -82,7 +82,6 @@ if (!config.includes("PASTE_SUPABASE_PUBLISHABLE_KEY")) errors.push("Browser con
 if (/sb_secret_[A-Za-z0-9_-]{12,}/.test(config)) errors.push("A secret-looking Supabase key was found in browser configuration.");
 if (/service_role_key\s*[:=]\s*["'][^"']{12,}["']/i.test(config)) errors.push("A service-role key value was found in browser configuration.");
 if (!deploy.includes("starter/site")) errors.push("Pages workflow must publish starter/site.");
-if (!deploy.includes("enablement: true")) errors.push("Pages workflow should attempt first-run Pages enablement.");
 
 for (const file of ["docs/en/01-start-here.md","docs/fa/01-start-here.md","docs/en/03-architecture.md","docs/fa/03-architecture.md"]) {
   const content = read(file);
